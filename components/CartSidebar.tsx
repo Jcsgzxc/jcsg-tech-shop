@@ -47,7 +47,15 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     customerPhone: string;
     customerAddress: string;
     instructions: string | null;
-    items: typeof items;
+    items: {
+      product: {
+        id: string;
+        name: string;
+        price: number;
+        image_url: string | null;
+      };
+      quantity: number;
+    }[];
     total: number;
     orderId: string;
   }) => {

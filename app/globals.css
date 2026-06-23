@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 6%;
+    --foreground: 180 100% 95%;
+    --card: 240 10% 10%;
+    --card-foreground: 180 100% 95%;
+    --popover: 240 10% 8%;
+    --popover-foreground: 180 100% 95%;
+    --primary: 175 95% 45%;
+    --primary-foreground: 240 10% 6%;
+    --secondary: 175 95% 25%;
+    --secondary-foreground: 180 100% 95%;
+    --muted: 240 10% 15%;
+    --muted-foreground: 180 30% 60%;
+    --accent: 175 95% 35%;
+    --accent-foreground: 180 100% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 175 50% 20%;
+    --input: 175 50% 15%;
+    --ring: 175 95% 45%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glow-teal {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.3), 0 0 40px rgba(20, 184, 166, 0.1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(20, 184, 166, 0.5), 0 0 20px rgba(20, 184, 166, 0.3);
+  }
+
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(20, 184, 166, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 184, 166, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}

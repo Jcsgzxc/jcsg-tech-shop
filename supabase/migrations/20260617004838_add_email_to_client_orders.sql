@@ -1,0 +1,1 @@
+ALTER TABLE client_orders ADD COLUMN email TEXT;

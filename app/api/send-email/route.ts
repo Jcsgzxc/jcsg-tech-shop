@@ -3,7 +3,12 @@ import { Resend } from 'resend';
 
 // --- Order Interfaces ---
 interface OrderItemPayload {
-  product: { id: string; name: string; price: number; };
+  product: { 
+    id: string; 
+    name: string; 
+    price: number;
+    [key: string]: any; // Allow any other fields
+  };
   quantity: number;
 }
 

@@ -1,18 +1,11 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { Product } from './supabase';
 
-// Make a simpler cart item type that doesn't require all Product fields
+// Keep the nested structure - this is actually better
 export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  image_url: string | null;
-  description?: string;
-  category?: string;
-  stock?: number;
-  featured?: boolean;
-  created_at?: string;
+  product: Product;
   quantity: number;
 }
 
@@ -20,7 +13,7 @@ interface CartContextType {
   items: CartItem[];
   itemCount: number;
   total: number;
-  addItem: (product: any) => void;
+  addItem: (product: Product) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -31,35 +24,22 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  const addItem = (product: any) => {
+  const addItem = (product: Product) => {
     setItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
+      const existingItem = prevItems.find((item) => item.product.id === product.id);
       if (existingItem) {
         return prevItems.map((item) =>
-          item.id === product.id
+          item.product.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
-      // Create cart item with only the fields we need
-      const cartItem: CartItem = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image_url: product.image_url,
-        description: product.description,
-        category: product.category,
-        stock: product.stock,
-        featured: product.featured,
-        created_at: product.created_at,
-        quantity: 1,
-      };
-      return [...prevItems, cartItem];
+      return [...prevItems, { product, quantity: 1 }];
     });
   };
 
   const removeItem = (productId: string) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+    setItems((prevItems) => prevItems.filter((item) => item.product.id !== productId));
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
@@ -69,7 +49,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        item.product.id === productId ? { ...item, quantity } : item
       )
     );
   };
@@ -79,7 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
     <CartContext.Provider value={{ items, itemCount, total, addItem, removeItem, updateQuantity, clearCart }}>

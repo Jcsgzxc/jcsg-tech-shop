@@ -4,9 +4,7 @@ import { Button } from '@/components/ui/button';
 import FeaturedProductsGrid from '@/components/FeaturedProductsGrid';
 import ReviewsSlider from '@/components/ReviewsSlider';
 import { supabase, Product } from '@/lib/supabase';
-export const config = {
-  runtime: 'edge',
-};
+export const runtime = 'edge';
 // This forces Next.js to fetch fresh data every time the page is visited
 export const revalidate = 0;
 

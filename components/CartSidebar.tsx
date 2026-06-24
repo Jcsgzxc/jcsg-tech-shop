@@ -123,7 +123,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       setStep('summary');
       clearCart();
 
-      void sendOrderEmail({ ...emailPayload, orderId: data.id });
+void sendOrderEmail({ ...emailPayload, orderId: data.id } as any);
     } catch {
       alert('Failed to submit order. Please try again.');
     } finally {

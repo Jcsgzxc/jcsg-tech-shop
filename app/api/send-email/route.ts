@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+export const runtime = 'edge';
 // --- Order Interfaces ---
 interface OrderItemPayload {
   product: { 

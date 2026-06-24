@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-
+export const runtime = 'edge';
 export default function CheckoutPage() {
   const cart = useCart();
   const items = cart.items || [];

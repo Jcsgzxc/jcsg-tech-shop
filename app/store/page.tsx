@@ -8,7 +8,7 @@ import ProductCard from '@/components/ProductCard';
 import { supabase, Product } from '@/lib/supabase';
 import { useCart } from '@/lib/CartContext';
 import { toast } from 'sonner';
-
+export const runtime = 'edge';
 const categories = ['All', 'Keyboards', 'Mice', 'Services'];
 
 export default function StorePage() {

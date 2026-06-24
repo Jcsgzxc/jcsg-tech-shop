@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 // Explicit relative path pointing straight down to your file
 import { supabase } from '../../lib/supabase';
-
+export const runtime = 'edge';
 const categories = ['Keyboards', 'Mice', 'Services'];
 
 export default function AdminPage() {
